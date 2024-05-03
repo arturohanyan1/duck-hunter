@@ -1,0 +1,23 @@
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: #3cbcfc;
+  position: relative;
+}
+
+.background_img {
+  width: 100%;
+  height: 270px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.tree_img {
+  width: 160px;
+  height: 240px;
+  position: absolute;
+  left: 15px;
+  bottom: 40px;
+  z-index: 1;
+}

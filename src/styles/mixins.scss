@@ -1,0 +1,63 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin custom-scroll-bar {
+  &::-webkit-scrollbar {
+    border-radius: 5px;
+    height: 4px;
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 5px;
+
+    &:hover {
+      background: #bbbbbb;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+}
+
+@mixin elipsis-text() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+@mixin svg-size($size) {
+  > div {
+    width: $size;
+    height: $size;
+
+    > div {
+      width: $size;
+      height: $size;
+    }
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin svg-color($color) {
+  svg {
+    path {
+      fill: $color;
+    }
+  }
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+  background: $color;
+  background: rgba($color, $opacity);
+}
