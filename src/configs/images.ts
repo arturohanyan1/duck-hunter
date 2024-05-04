@@ -1,4 +1,4 @@
-export const duckHuntImages = {
+export const images = {
   duck_hunt_background: "/images/duckHunt/duck_hunt_background.png",
   tree: "/images/duckHunt/tree.png",
   bush_1: "/images/duckHunt/bush_1.png",

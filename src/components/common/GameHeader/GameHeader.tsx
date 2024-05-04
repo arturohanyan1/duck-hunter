@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { duckHuntImages } from "../../../configs/duckHuntImages";
+import { images } from "../../../configs/images";
 
 type IProps = {
   classname?: string;
@@ -12,10 +12,7 @@ const GameHeader: FC<IProps> = ({ classname, score }) => {
   return (
     <div className={cn(styles.container, classname)}>
       <div className={styles.score}>
-        <img
-          src={score ? duckHuntImages.score_2 : duckHuntImages.score_1}
-          alt="score"
-        />
+        <img src={score ? images.score_2 : images.score_1} alt="score" />
         <div className={styles.score_value}>
           <span>{score}</span>
         </div>

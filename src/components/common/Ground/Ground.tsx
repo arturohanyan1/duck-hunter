@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { duckHuntImages } from "../../../configs/duckHuntImages";
+import { images } from "../../../configs/images";
 
 type IProps = {
   classname?: string;
@@ -10,10 +10,10 @@ type IProps = {
 const Ground: FC<IProps> = ({ classname }) => {
   return (
     <div className={cn(styles.container, classname)}>
-      <img src={duckHuntImages.tree} alt="tree" className={styles.tree} />
-      <img src={duckHuntImages.ground} alt="ground" className={styles.ground} />
-      <img src={duckHuntImages.bush_1} alt="bush" className={styles.bush_1} />
-      <img src={duckHuntImages.bush_2} alt="bush" className={styles.bush_2} />
+      <img src={images.tree} alt="tree" className={styles.tree} />
+      <img src={images.ground} alt="ground" className={styles.ground} />
+      <img src={images.bush_1} alt="bush" className={styles.bush_1} />
+      <img src={images.bush_2} alt="bush" className={styles.bush_2} />
     </div>
   );
 };
