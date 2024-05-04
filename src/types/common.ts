@@ -8,8 +8,8 @@ export type IDuckStateType =
   | "right"
   | "top_left"
   | "top_right"
-  | "bottom-left"
-  | "bottom-right"
+  | "bottom_left"
+  | "bottom_right"
   | "shot"
   | "death"
   | "missed";
@@ -18,5 +18,6 @@ export interface IDuckDataType {
   state: IDuckStateType;
   position: { x: number; y: number };
   dirChangedCount: number;
+  dirChangedDelay: number;
   shotStateDelay: number;
 }
