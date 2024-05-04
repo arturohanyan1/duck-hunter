@@ -7,7 +7,7 @@ import Ground from "../common/Ground";
 import Dog from "../common/Dog";
 import GameHeader from "../common/GameHeader";
 import { IDuckDataType, IZoneSize } from "../../types/common";
-import { changeDuckData, createDuck } from "../../utils/helpers";
+import { changeDuckData, createDuck } from "../../utils/gameHelpers";
 
 type IProps = {
   classname?: string;
@@ -71,19 +71,6 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     <div className={cn(styles.container, classname)}>
       <GameHeader classname={styles.header} />
       <div id="game_zone" className={styles.game_zone}>
-        {/* <Duck
-          onDuckClick={onDuckClick}
-          state="duck_death"
-          position={{ x: 0, y: 300 }}
-        />
-        <Duck state="duck_shot" position={{ x: 40, y: 300 }} />
-        <Duck
-          state="duck_left"
-          position={{ x: 180, y: 200 }}
-          onDuckClick={onDuckClick}
-        />
-        <Duck state="duck_top_left" position={{ x: 160, y: 300 }} />
-        <Duck state="duck_top_right" position={{ x: 200, y: 300 }} /> */}
         {ducks.map((duck: IDuckDataType, idx: number) => (
           <Duck
             key={idx}
