@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import styles from "./styles.module.scss";
-import DuckHunt from "../../components/Game/DuckHunt";
+import Game from "../../components/Game";
 
 const DuckHantPage: FC = () => {
   return (
     <div className={styles.page}>
-      <DuckHunt />
+      <Game />
     </div>
   );
 };

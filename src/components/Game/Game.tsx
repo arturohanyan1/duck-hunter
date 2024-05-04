@@ -1,11 +1,10 @@
 import cn from "classnames";
 import { FC, useState } from "react";
 import styles from "./styles.module.scss";
-import { duckHuntImages } from "../../../configs/duckHuntImages";
-import Duck from "../Duck/Duck";
-import Dog from "../Dog";
-import { useInterval } from "../../../hooks/useInterval";
-import Ground from "../Ground";
+import { useInterval } from "../../hooks/useInterval";
+import Duck from "../common/Duck";
+import Ground from "../common/Ground";
+import Dog from "../common/Dog";
 
 type IProps = {
   classname?: string;
