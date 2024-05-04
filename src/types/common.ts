@@ -19,5 +19,6 @@ export interface IDuckDataType {
   position: { x: number; y: number };
   dirChangedCount: number;
   dirChangedDelay: number;
+  dirDuration: number;
   shotStateDelay: number;
 }

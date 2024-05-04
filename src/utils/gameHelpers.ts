@@ -6,11 +6,13 @@ export const createDuck = (width: number): IDuckDataType => {
   const min = 40;
   const max = width - 40;
   const xPos = Math.floor(Math.random() * (max - min + 1)) + min;
+  const dirChangedDelay = Math.floor(Math.random() * (300 - 200 + 1)) + 100;
   const newDuck = {
     state: state,
     position: { x: xPos, y: -40 },
     dirChangedCount: 0,
-    dirChangedDelay: 0,
+    dirChangedDelay: dirChangedDelay,
+    dirDuration: 0,
     shotStateDelay: 0,
   };
   return newDuck;
@@ -44,10 +46,14 @@ const getNewState = (
   newStates.splice(idx, 1);
   const availableStates = newStates;
 
+  newData.dirDuration = data.dirDuration + 1;
   if (data.dirChangedCount > 2) {
     newData.position = { x: newXPos, y: newYPos };
     return newData;
-  } else if (isInvalidPos(newXPos, newYPos, zoneSize)) {
+  } else if (
+    isInvalidPos(newXPos, newYPos, zoneSize) ||
+    newData.dirDuration === data.dirChangedDelay
+  ) {
     const newState = getRandomItemFromArray(availableStates);
     newData.state = newState;
     newData.dirChangedCount = data.dirChangedCount + 1;
