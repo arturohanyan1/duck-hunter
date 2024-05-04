@@ -49,6 +49,9 @@ const getNewState = (
   newData.dirDuration = data.dirDuration + 1;
   if (data.dirChangedCount > 2) {
     newData.position = { x: newXPos, y: newYPos };
+    if (isInvalidPos(newXPos, newYPos, zoneSize)) {
+      newData.state = "missed";
+    }
     return newData;
   } else if (
     isInvalidPos(newXPos, newYPos, zoneSize) ||

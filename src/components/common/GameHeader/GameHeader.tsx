@@ -17,7 +17,7 @@ const GameHeader: FC<IProps> = ({ classname, score }) => {
           <span>{score}</span>
         </div>
       </div>
-      <div className={styles.username}>username</div>
+      <div className={styles.username}>player</div>
     </div>
   );
 };

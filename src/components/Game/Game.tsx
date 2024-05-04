@@ -63,7 +63,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
   }, 6);
 
   useInterval((): void => {
-    if (ducks.length < 40) {
+    if (ducks.length < 4) {
       const newDuck = createDuck(zoneSize.width);
       const newDucks = [...ducks];
       newDucks.push(newDuck);
