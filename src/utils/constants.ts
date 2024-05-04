@@ -3,10 +3,11 @@ const DUCK_STATES = [
   "right",
   "top_left",
   "top_right",
-  "bottom_left",
-  "bottom_right",
+  "bottom-left",
+  "bottom-right",
   "shot",
   "death",
+  "missed",
 ];
 
 export { DUCK_STATES };

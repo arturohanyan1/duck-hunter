@@ -1,18 +1,11 @@
 import cn from "classnames";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { IDuckStateType } from "../../../types/common";
 
 type IProps = {
   classname?: string;
-  state:
-    | "left"
-    | "right"
-    | "top_left"
-    | "top_right"
-    | "bottom-left"
-    | "bottom-right"
-    | "shot"
-    | "death";
+  state: IDuckStateType;
   position: { x: number; y: number };
   onDuckClick?: () => void;
 };
