@@ -72,12 +72,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
       <GameHeader classname={styles.header} />
       <div id="game_zone" className={styles.game_zone}>
         {ducks.map((duck: IDuckDataType, idx: number) => (
-          <Duck
-            key={idx}
-            state={duck.state}
-            position={duck.position}
-            onDuckClick={() => onDuckClick(idx)}
-          />
+          <Duck key={idx} data={duck} onDuckClick={() => onDuckClick(idx)} />
         ))}
         {/* <Dog state="dog_find" position={{ x: 40, y: 40 }} /> */}
         {/* <Dog state="dog_laugh" position={{ x: 300, y: 200 }} /> */}
