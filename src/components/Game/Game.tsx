@@ -5,6 +5,7 @@ import { useInterval } from "../../hooks/useInterval";
 import Duck from "../common/Duck";
 import Ground from "../common/Ground";
 import Dog from "../common/Dog";
+import GameHeader from "../common/GameHeader";
 
 type IProps = {
   classname?: string;
@@ -23,6 +24,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
   };
   return (
     <div className={cn(styles.container, classname)}>
+      <GameHeader classname={styles.header} />
       <div className={styles.game_zone}>
         <Duck
           onDuckClick={onDuckClick}
