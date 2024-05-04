@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useInterval } from "../../hooks/useInterval";
 import Duck from "../common/Duck";
@@ -12,20 +12,45 @@ type IProps = {
 };
 
 const DuckHunt: FC<IProps> = ({ classname }) => {
+  // States
   const [ducksPosition, setDucksPosition] = useState<any>({ x: 0, y: 0 });
-  useInterval((): void => {
-    const newPos = { x: ducksPosition.x + 1, y: ducksPosition.y + 1 };
-    setDucksPosition(newPos);
-  }, 6);
+  const [gameZoneSize, setGameZoneSize] = useState({ width: 0, height: 0 });
 
   // Actions
   const onDuckClick = () => {
     alert(5);
   };
+
+  // Effects
+  useEffect(() => {
+    const gameZone = document.getElementById("game_zone");
+    if (gameZone) {
+      const handleResize = () => {
+        setGameZoneSize({
+          width: gameZone.clientWidth,
+          height: gameZone.clientHeight,
+        });
+      };
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, []);
+
+  console.log(console.log(gameZoneSize));
+
+  // Game Logic
+  useInterval((): void => {
+    const newPos = { x: ducksPosition.x + 1, y: ducksPosition.y + 1 };
+    setDucksPosition(newPos);
+  }, 6);
+
   return (
     <div className={cn(styles.container, classname)}>
       <GameHeader classname={styles.header} />
-      <div className={styles.game_zone}>
+      <div id="game_zone" className={styles.game_zone}>
         <Duck
           onDuckClick={onDuckClick}
           state="duck_death"
