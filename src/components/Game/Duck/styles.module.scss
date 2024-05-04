@@ -1,0 +1,106 @@
+.duck {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+
+  &_state {
+    &__duck_left {
+      animation-name: duck_left;
+    }
+    &__duck_right {
+      animation-name: duck_right;
+    }
+    &__duck_top_left {
+      animation-name: duck_top_left;
+    }
+    &__duck_top_right {
+      animation-name: duck_top_right;
+    }
+    &__duck_shot {
+      animation-name: duck_shot;
+    }
+    &__duck_death {
+      animation-name: duck_death;
+    }
+  }
+}
+
+// ANIMATION KEYFRAMES
+@keyframes duck_left {
+  0% {
+    background-image: url("../../../../public/images/duckHunt/duck_left_1.png");
+  }
+  50% {
+    background-image: url("../../../../public/images/duckHunt/duck_left_2.png");
+  }
+  100% {
+    background-image: url("../../../../public/images/duckHunt/duck_left_3.png");
+  }
+}
+
+@keyframes duck_right {
+  0% {
+    background-image: url("../../../../public/images/duckHunt/duck_right_1.png");
+  }
+  50% {
+    background-image: url("../../../../public/images/duckHunt/duck_right_2.png");
+  }
+  100% {
+    background-image: url("../../../../public/images/duckHunt/duck_right_3.png");
+  }
+}
+
+@keyframes duck_top_left {
+  0% {
+    background-image: url("../../../../public/images/duckHunt/duck_top_left_1.png");
+  }
+  50% {
+    background-image: url("../../../../public/images/duckHunt/duck_top_left_2.png");
+  }
+  100% {
+    background-image: url("../../../../public/images/duckHunt/duck_top_left_3.png");
+  }
+}
+
+@keyframes duck_top_right {
+  0% {
+    background-image: url("../../../../public/images/duckHunt/duck_top_right_1.png");
+  }
+  50% {
+    background-image: url("../../../../public/images/duckHunt/duck_top_right_2.png");
+  }
+  100% {
+    background-image: url("../../../../public/images/duckHunt/duck_top_right_3.png");
+  }
+}
+
+@keyframes duck_shot {
+  0% {
+    background-image: url("../../../../public/images/duckHunt/duck_shot.png");
+  }
+  100% {
+    background-image: url("../../../../public/images/duckHunt/duck_shot.png");
+  }
+}
+
+@keyframes duck_death {
+  0% {
+    background-image: url("../../../../public/images/duckHunt/duck_death_1.png");
+  }
+  25% {
+    background-image: url("../../../../public/images/duckHunt/duck_death_2.png");
+  }
+  50% {
+    background-image: url("../../../../public/images/duckHunt/duck_death_1.png");
+  }
+  100% {
+    background-image: url("../../../../public/images/duckHunt/duck_death_2.png");
+  }
+}
