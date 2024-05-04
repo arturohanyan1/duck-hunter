@@ -45,7 +45,7 @@ export const createDuck = (width: number): IDuckDataType => {
     state: state,
     position: { x: xPos, y: -40 },
     dirChangedCount: 0,
-    shotStateTime: 0,
+    shotStateDelay: 0,
   };
   return newDuck;
 };
@@ -54,10 +54,25 @@ export const changeDuckData = (
   data: IDuckDataType,
   zoneSize: IZoneSize
 ): IDuckDataType => {
-  console.log(data, zoneSize);
-  const newData = {
-    ...data,
-    position: { x: data.position.x + 1, y: data.position.y + 1 },
-  };
-  return newData;
+  let newData = { ...data };
+  if (data.state === "shot") {
+    if (data.shotStateDelay > 25) {
+      newData.state = "death";
+      return newData;
+    } else {
+      newData.shotStateDelay = data.shotStateDelay + 1;
+      return newData;
+    }
+  } else if (data.state === "death") {
+    if (data.position.y < -40) {
+      newData.state = "missed";
+      return newData;
+    } else {
+      newData.position = { x: data.position.x, y: data.position.y - 1 };
+      return newData;
+    }
+  } else {
+    newData.position = { x: data.position.x + 1, y: data.position.y + 1 };
+    return newData;
+  }
 };

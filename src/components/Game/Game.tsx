@@ -20,7 +20,11 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
 
   // Actions
   const onDuckClick = (index: number) => {
-    alert(index);
+    const currentDuck = ducks[index];
+    currentDuck.state = "shot";
+    const newDucks = [...ducks];
+    newDucks.splice(index, 1, currentDuck);
+    setDucks(newDucks);
   };
 
   // Effects
@@ -41,16 +45,19 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     }
   }, []);
 
+  // Game Logic
   useInterval((): void => {
     if (ducks.length) {
       const newDucks = ducks.map((el: IDuckDataType) =>
         changeDuckData(el, zoneSize)
       );
-      setDucks(newDucks);
+      const filteredDucks = newDucks.filter(
+        (el: IDuckDataType) => el.state !== "missed"
+      );
+      setDucks(filteredDucks);
     }
   }, 6);
 
-  // Game Logic
   useInterval((): void => {
     if (ducks.length < 4) {
       const newDuck = createDuck(zoneSize.width);
@@ -58,7 +65,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
       newDucks.push(newDuck);
       setDucks(newDucks);
     }
-  }, 4000);
+  }, 2000);
 
   return (
     <div className={cn(styles.container, classname)}>
