@@ -1,0 +1,32 @@
+.dog {
+  height: 72px;
+  width: 60px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 2;
+
+  &_state {
+    &__dog_find {
+      background-image: url("../../../../public/images/duckHunt/dog_find.png");
+    }
+    &__dog_laugh {
+      animation-name: dog_laugh;
+      animation-duration: 0.2s;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+// ANIMATION KEYFRAMES
+@keyframes dog_laugh {
+  0% {
+    background-image: url("../../../../public/images/duckHunt/dog_laugh_1.png");
+  }
+  100% {
+    background-image: url("../../../../public/images/duckHunt/dog_laugh_2.png");
+  }
+}

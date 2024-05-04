@@ -3,6 +3,7 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { duckHuntImages } from "../../../configs/duckHuntImages";
 import Duck from "../Duck/Duck";
+import Dog from "../Dog";
 
 type IProps = {
   classname?: string;
@@ -27,6 +28,8 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
       <Duck state="duck_right" position={{ x: 120, y: 300 }} />
       <Duck state="duck_top_left" position={{ x: 160, y: 300 }} />
       <Duck state="duck_top_right" position={{ x: 200, y: 300 }} />
+      <Dog state="dog_find" position={{ x: 40, y: 40 }} />
+      <Dog state="dog_laugh" position={{ x: 300, y: 200 }} />
     </div>
   );
 };
