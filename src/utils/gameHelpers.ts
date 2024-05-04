@@ -6,7 +6,7 @@ export const createDuck = (width: number): IDuckDataType => {
   const min = 40;
   const max = width - 40;
   const xPos = Math.floor(Math.random() * (max - min + 1)) + min;
-  const dirChangedDelay = Math.floor(Math.random() * (300 - 200 + 1)) + 100;
+  const dirChangedDelay = Math.floor(Math.random() * (500 - 200 + 1)) + 100;
   const newDuck = {
     state: state,
     position: { x: xPos, y: -40 },
@@ -57,6 +57,9 @@ const getNewState = (
     const newState = getRandomItemFromArray(availableStates);
     newData.state = newState;
     newData.dirChangedCount = data.dirChangedCount + 1;
+    if (newData.dirDuration === data.dirChangedDelay) {
+      newData.dirDuration = 0;
+    }
     return newData;
   } else {
     newData.position = { x: newXPos, y: newYPos };

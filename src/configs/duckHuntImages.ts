@@ -1,5 +1,4 @@
 export const duckHuntImages = {
-  logo: "/images/logo.png",
   duck_hunt_background: "/images/duckHunt/duck_hunt_background.png",
   tree: "/images/duckHunt/tree.png",
   bush_1: "/images/duckHunt/bush_1.png",
@@ -23,4 +22,6 @@ export const duckHuntImages = {
   duck_top_right_1: "/images/duckHunt/duck_top_right_1.png",
   duck_top_right_2: "/images/duckHunt/duck_top_right_2.png",
   duck_top_right_3: "/images/duckHunt/duck_top_right_3.png",
+  score_1: "/images/duckHunt/score_1.png",
+  score_2: "/images/duckHunt/score_2.png",
 };
