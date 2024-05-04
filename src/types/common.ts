@@ -1,3 +1,8 @@
+export type IZoneSize = {
+  width: number;
+  height: number;
+};
+
 export type IDuckStateType =
   | "left"
   | "right"

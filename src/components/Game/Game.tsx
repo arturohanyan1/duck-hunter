@@ -6,8 +6,8 @@ import Duck from "../common/Duck";
 import Ground from "../common/Ground";
 import Dog from "../common/Dog";
 import GameHeader from "../common/GameHeader";
-import { IDuckDataType } from "../../types/common";
-import { createDuck } from "../../utils/helpers";
+import { IDuckDataType, IZoneSize } from "../../types/common";
+import { changeDuckData, createDuck } from "../../utils/helpers";
 
 type IProps = {
   classname?: string;
@@ -16,7 +16,7 @@ type IProps = {
 const DuckHunt: FC<IProps> = ({ classname }) => {
   // States
   const [ducks, setDucks] = useState<IDuckDataType[]>([]);
-  const [gameZoneSize, setGameZoneSize] = useState({ width: 0, height: 0 });
+  const [zoneSize, setZoneSize] = useState<IZoneSize>({ width: 0, height: 0 });
 
   // Actions
   const onDuckClick = (index: number) => {
@@ -28,7 +28,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     const gameZone = document.getElementById("game_zone");
     if (gameZone) {
       const handleResize = () => {
-        setGameZoneSize({
+        setZoneSize({
           width: gameZone.clientWidth,
           height: gameZone.clientHeight,
         });
@@ -41,14 +41,11 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     }
   }, []);
 
-  console.log(console.log(gameZoneSize));
-
   useInterval((): void => {
     if (ducks.length) {
-      const newDucks = ducks.map((el: IDuckDataType) => ({
-        ...el,
-        position: { x: el.position.x + 1, y: el.position.y + 1 },
-      }));
+      const newDucks = ducks.map((el: IDuckDataType) =>
+        changeDuckData(el, zoneSize)
+      );
       setDucks(newDucks);
     }
   }, 6);
@@ -56,7 +53,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
   // Game Logic
   useInterval((): void => {
     if (ducks.length < 4) {
-      const newDuck = createDuck(gameZoneSize.width);
+      const newDuck = createDuck(zoneSize.width);
       const newDucks = [...ducks];
       newDucks.push(newDuck);
       setDucks(newDucks);

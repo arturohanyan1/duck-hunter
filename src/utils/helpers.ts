@@ -1,4 +1,4 @@
-import { IDuckDataType } from "../types/common";
+import { IDuckDataType, IZoneSize } from "../types/common";
 
 const filterValue = <T>(value: T): boolean =>
   value !== undefined && value !== null;
@@ -48,4 +48,16 @@ export const createDuck = (width: number): IDuckDataType => {
     shotStateTime: 0,
   };
   return newDuck;
+};
+
+export const changeDuckData = (
+  data: IDuckDataType,
+  zoneSize: IZoneSize
+): IDuckDataType => {
+  console.log(data, zoneSize);
+  const newData = {
+    ...data,
+    position: { x: data.position.x + 1, y: data.position.y + 1 },
+  };
+  return newData;
 };
