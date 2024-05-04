@@ -1,7 +1,10 @@
 export const duckHuntImages = {
   logo: "/images/logo.png",
   duck_hunt_background: "/images/duckHunt/duck_hunt_background.png",
-  duck_hunt_tree: "/images/duckHunt/duck_hunt_tree.png",
+  tree: "/images/duckHunt/tree.png",
+  bush_1: "/images/duckHunt/bush_1.png",
+  bush_2: "/images/duckHunt/bush_2.png",
+  ground: "/images/duckHunt/ground.png",
   dog_find: "/images/duckHunt/dog_find.png",
   dog_laugh_1: "/images/duckHunt/dog_laugh_1.png",
   dog_laugh_2: "/images/duckHunt/dog_laugh_2.png",

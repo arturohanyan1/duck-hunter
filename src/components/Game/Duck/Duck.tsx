@@ -12,11 +12,18 @@ type IProps = {
     | "duck_shot"
     | "duck_death";
   position: { x: number; y: number };
+  onDuckClick?: () => void;
 };
 
-const Duck: FC<IProps> = ({ classname, state = "duck_right", position }) => {
+const Duck: FC<IProps> = ({
+  classname,
+  state = "duck_right",
+  position,
+  onDuckClick,
+}) => {
   return (
     <div
+      onClick={onDuckClick}
       style={{ left: `${position?.x}px`, bottom: `${position?.y}px` }}
       className={cn(
         styles.duck,
