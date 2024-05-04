@@ -6,6 +6,8 @@ import Duck from "../common/Duck";
 import Ground from "../common/Ground";
 import Dog from "../common/Dog";
 import GameHeader from "../common/GameHeader";
+import { IDuckDataType } from "../../types/common";
+import { createDuck } from "../../utils/helpers";
 
 type IProps = {
   classname?: string;
@@ -13,12 +15,12 @@ type IProps = {
 
 const DuckHunt: FC<IProps> = ({ classname }) => {
   // States
-  const [ducksPosition, setDucksPosition] = useState<any>({ x: 0, y: 0 });
+  const [ducks, setDucks] = useState<IDuckDataType[]>([]);
   const [gameZoneSize, setGameZoneSize] = useState({ width: 0, height: 0 });
 
   // Actions
-  const onDuckClick = () => {
-    alert(5);
+  const onDuckClick = (index: number) => {
+    alert(index);
   };
 
   // Effects
@@ -41,17 +43,31 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
 
   console.log(console.log(gameZoneSize));
 
+  useInterval((): void => {
+    if (ducks.length) {
+      const newDucks = ducks.map((el: IDuckDataType) => ({
+        ...el,
+        position: { x: el.position.x + 1, y: el.position.y + 1 },
+      }));
+      setDucks(newDucks);
+    }
+  }, 6);
+
   // Game Logic
   useInterval((): void => {
-    const newPos = { x: ducksPosition.x + 1, y: ducksPosition.y + 1 };
-    setDucksPosition(newPos);
-  }, 6);
+    if (ducks.length < 4) {
+      const newDuck = createDuck(gameZoneSize.width);
+      const newDucks = [...ducks];
+      newDucks.push(newDuck);
+      setDucks(newDucks);
+    }
+  }, 4000);
 
   return (
     <div className={cn(styles.container, classname)}>
       <GameHeader classname={styles.header} />
       <div id="game_zone" className={styles.game_zone}>
-        <Duck
+        {/* <Duck
           onDuckClick={onDuckClick}
           state="duck_death"
           position={{ x: 0, y: 300 }}
@@ -62,14 +78,18 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
           position={{ x: 180, y: 200 }}
           onDuckClick={onDuckClick}
         />
-        <Duck
-          state="duck_right"
-          position={{ x: ducksPosition.x, y: ducksPosition.y }}
-        />
         <Duck state="duck_top_left" position={{ x: 160, y: 300 }} />
-        <Duck state="duck_top_right" position={{ x: 200, y: 300 }} />
-        <Dog state="dog_find" position={{ x: 40, y: 40 }} />
-        <Dog state="dog_laugh" position={{ x: 300, y: 200 }} />
+        <Duck state="duck_top_right" position={{ x: 200, y: 300 }} /> */}
+        {ducks.map((duck: IDuckDataType, idx: number) => (
+          <Duck
+            key={idx}
+            state={duck.state}
+            position={duck.position}
+            onDuckClick={() => onDuckClick(idx)}
+          />
+        ))}
+        {/* <Dog state="dog_find" position={{ x: 40, y: 40 }} /> */}
+        {/* <Dog state="dog_laugh" position={{ x: 300, y: 200 }} /> */}
       </div>
       <Ground classname={styles.ground} />
     </div>

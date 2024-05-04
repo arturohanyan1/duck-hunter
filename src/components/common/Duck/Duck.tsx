@@ -4,23 +4,20 @@ import styles from "./styles.module.scss";
 
 type IProps = {
   classname?: string;
-  state?:
-    | "duck_left"
-    | "duck_right"
-    | "duck_top_left"
-    | "duck_top_right"
-    | "duck_shot"
-    | "duck_death";
+  state:
+    | "left"
+    | "right"
+    | "top_left"
+    | "top_right"
+    | "bottom-left"
+    | "bottom-right"
+    | "shot"
+    | "death";
   position: { x: number; y: number };
   onDuckClick?: () => void;
 };
 
-const Duck: FC<IProps> = ({
-  classname,
-  state = "duck_right",
-  position,
-  onDuckClick,
-}) => {
+const Duck: FC<IProps> = ({ classname, state, position, onDuckClick }) => {
   return (
     <div
       onClick={onDuckClick}

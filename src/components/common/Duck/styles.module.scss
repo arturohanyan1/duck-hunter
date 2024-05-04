@@ -11,22 +11,28 @@
   animation-iteration-count: infinite;
 
   &_state {
-    &__duck_left {
+    &__left {
       animation-name: duck_left;
     }
-    &__duck_right {
+    &__right {
       animation-name: duck_right;
     }
-    &__duck_top_left {
+    &__top_left {
       animation-name: duck_top_left;
     }
-    &__duck_top_right {
+    &__top_right {
       animation-name: duck_top_right;
     }
-    &__duck_shot {
+    &__bottom_left {
+      animation-name: duck_left;
+    }
+    &__bottom_right {
+      animation-name: duck_right;
+    }
+    &__shot {
       animation-name: duck_shot;
     }
-    &__duck_death {
+    &__death {
       animation-name: duck_death;
     }
   }

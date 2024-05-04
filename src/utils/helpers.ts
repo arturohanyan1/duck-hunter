@@ -1,3 +1,5 @@
+import { IDuckDataType } from "../types/common";
+
 const filterValue = <T>(value: T): boolean =>
   value !== undefined && value !== null;
 
@@ -28,4 +30,22 @@ export const getQueryString = (
     })
     .filter(Boolean)
     .join("&");
+};
+
+export const getRandomItemFromArray = (arr: any): any => {
+  return arr[Math.floor(Math.random() * arr.length)];
+};
+
+export const createDuck = (width: number): IDuckDataType => {
+  const state = getRandomItemFromArray(["top_left", "top_right"]);
+  const min = 40;
+  const max = width - 40;
+  const xPos = Math.floor(Math.random() * (max - min + 1)) + min;
+  const newDuck = {
+    state: state,
+    position: { x: xPos, y: -40 },
+    dirChangedCount: 0,
+    shotStateTime: 0,
+  };
+  return newDuck;
 };
