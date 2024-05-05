@@ -1,6 +1,17 @@
-import { IDuckData, IZoneSize } from "../types/common";
+import { IDogData, IDuckData, IZoneSize } from "../types/common";
 import { getRandomItemFromArray } from "./helpers";
 
+// DOG
+export const createDog = (width: number): IDogData => {
+  const xPos = Math.round(width / 2);
+  return {
+    state: "dog_hide",
+    position: { x: xPos, y: -72 },
+    onAction: false,
+  };
+};
+
+// DUCk
 export const createDuck = (width: number): IDuckData => {
   const state = getRandomItemFromArray(["top_left", "top_right"]);
   const min = 40;

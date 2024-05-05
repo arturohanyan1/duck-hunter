@@ -6,8 +6,8 @@ import Duck from "../common/Duck";
 import Ground from "../common/Ground";
 import Dog from "../common/Dog";
 import GameHeader from "../common/GameHeader";
-import { IDuckData, IZoneSize } from "../../types/common";
-import { changeDuckData, createDuck } from "../../utils/gameHelpers";
+import { IDogData, IDuckData, IZoneSize } from "../../types/common";
+import { changeDuckData, createDog, createDuck } from "../../utils/gameHelpers";
 
 type IProps = {
   classname?: string;
@@ -16,6 +16,7 @@ type IProps = {
 const DuckHunt: FC<IProps> = ({ classname }) => {
   // States
   const [ducks, setDucks] = useState<IDuckData[]>([]);
+  const [dog, setDog] = useState<IDogData | null>(null);
   const [zoneSize, setZoneSize] = useState<IZoneSize>({ width: 0, height: 0 });
   const [score, setScore] = useState<number>(0);
 
@@ -47,6 +48,13 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (zoneSize.width && !dog) {
+      const newDog = createDog(zoneSize.width);
+      setDog(newDog);
+    }
+  }, [zoneSize, dog]);
+
   // Game Logic
   useInterval((): void => {
     if (ducks.length) {
@@ -61,7 +69,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
   }, 6);
 
   useInterval((): void => {
-    if (ducks.length < 4) {
+    if (ducks.length < 4 && zoneSize.width) {
       const newDuck = createDuck(zoneSize.width);
       const newDucks = [...ducks];
       newDucks.push(newDuck);
@@ -76,34 +84,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
         {ducks.map((duck: IDuckData, idx: number) => (
           <Duck key={idx} data={duck} onDuckClick={() => onDuckClick(idx)} />
         ))}
-        <Dog
-          data={{
-            state: "dog_find_1",
-            position: { x: 200, y: -20 },
-            onAction: false,
-          }}
-        />
-        <Dog
-          data={{
-            state: "dog_find_2",
-            position: { x: 260, y: 0 },
-            onAction: false,
-          }}
-        />
-        <Dog
-          data={{
-            state: "dog_laugh",
-            position: { x: 320, y: 0 },
-            onAction: false,
-          }}
-        />
-        <Dog
-          data={{
-            state: "dog_hide",
-            position: { x: 380, y: 0 },
-            onAction: false,
-          }}
-        />
+        {dog && <Dog data={dog} />}
       </div>
       <Ground classname={styles.ground} />
     </div>
