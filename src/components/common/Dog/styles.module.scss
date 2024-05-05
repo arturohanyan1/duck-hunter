@@ -10,13 +10,19 @@
   z-index: 2;
 
   &_state {
-    &__dog_find {
-      background-image: url("../../../../public/images/duckHunt/dog_find.png");
+    &__dog_find_1 {
+      background-image: url("../../../../public/images/duckHunt/dog_find_1.png");
+    }
+    &__dog_find_2 {
+      background-image: url("../../../../public/images/duckHunt/dog_find_2.png");
     }
     &__dog_laugh {
       animation-name: dog_laugh;
       animation-duration: 0.2s;
       animation-iteration-count: infinite;
+    }
+    &__dog_hide {
+      display: none;
     }
   }
 }

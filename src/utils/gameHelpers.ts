@@ -1,7 +1,7 @@
-import { IDuckDataType, IZoneSize } from "../types/common";
+import { IDuckData, IZoneSize } from "../types/common";
 import { getRandomItemFromArray } from "./helpers";
 
-export const createDuck = (width: number): IDuckDataType => {
+export const createDuck = (width: number): IDuckData => {
   const state = getRandomItemFromArray(["top_left", "top_right"]);
   const min = 40;
   const max = width - 40;
@@ -27,11 +27,11 @@ const isMissedPos = (x: number, y: number, zone: IZoneSize): boolean => {
 };
 
 const getNewState = (
-  data: IDuckDataType,
+  data: IDuckData,
   zoneSize: IZoneSize,
   newXPos: number,
   newYPos: number
-): IDuckDataType => {
+): IDuckData => {
   const newData = { ...data };
   const newStates =
     data.dirChangedCount === 2
@@ -75,9 +75,9 @@ const getNewState = (
 };
 
 export const changeDuckData = (
-  data: IDuckDataType,
+  data: IDuckData,
   zoneSize: IZoneSize
-): IDuckDataType => {
+): IDuckData => {
   let newData = { ...data };
   if (data.state === "shot") {
     if (data.shotStateDelay > 25) {

@@ -3,7 +3,7 @@ export type IZoneSize = {
   height: number;
 };
 
-export type IDuckStateType =
+export type IDuckState =
   | "left"
   | "right"
   | "top_left"
@@ -14,11 +14,19 @@ export type IDuckStateType =
   | "death"
   | "missed";
 
-export interface IDuckDataType {
-  state: IDuckStateType;
+export interface IDuckData {
+  state: IDuckState;
   position: { x: number; y: number };
   dirChangedCount: number;
   dirChangedDelay: number;
   dirDuration: number;
   shotStateDelay: number;
+}
+
+export type IDogState = "dog_find_1" | "dog_find_2" | "dog_laugh" | "dog_hide";
+
+export interface IDogData {
+  state: IDogState;
+  position: { x: number; y: number };
+  onAction: boolean;
 }

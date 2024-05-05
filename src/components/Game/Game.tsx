@@ -6,7 +6,7 @@ import Duck from "../common/Duck";
 import Ground from "../common/Ground";
 import Dog from "../common/Dog";
 import GameHeader from "../common/GameHeader";
-import { IDuckDataType, IZoneSize } from "../../types/common";
+import { IDuckData, IZoneSize } from "../../types/common";
 import { changeDuckData, createDuck } from "../../utils/gameHelpers";
 
 type IProps = {
@@ -15,7 +15,7 @@ type IProps = {
 
 const DuckHunt: FC<IProps> = ({ classname }) => {
   // States
-  const [ducks, setDucks] = useState<IDuckDataType[]>([]);
+  const [ducks, setDucks] = useState<IDuckData[]>([]);
   const [zoneSize, setZoneSize] = useState<IZoneSize>({ width: 0, height: 0 });
   const [score, setScore] = useState<number>(0);
 
@@ -36,10 +36,8 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     const gameZone = document.getElementById("game_zone");
     if (gameZone) {
       const handleResize = () => {
-        setZoneSize({
-          width: gameZone.clientWidth,
-          height: gameZone.clientHeight,
-        });
+        const { clientWidth, clientHeight } = gameZone;
+        setZoneSize({ width: clientWidth, height: clientHeight });
       };
       handleResize();
       window.addEventListener("resize", handleResize);
@@ -52,11 +50,11 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
   // Game Logic
   useInterval((): void => {
     if (ducks.length) {
-      const newDucks = ducks.map((el: IDuckDataType) =>
+      const newDucks = ducks.map((el: IDuckData) =>
         changeDuckData(el, zoneSize)
       );
       const filteredDucks = newDucks.filter(
-        (el: IDuckDataType) => el.state !== "missed"
+        (el: IDuckData) => el.state !== "missed"
       );
       setDucks(filteredDucks);
     }
@@ -75,11 +73,37 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     <div className={cn(styles.container, classname)}>
       <GameHeader score={score} classname={styles.header} />
       <div id="game_zone" className={styles.game_zone}>
-        {ducks.map((duck: IDuckDataType, idx: number) => (
+        {ducks.map((duck: IDuckData, idx: number) => (
           <Duck key={idx} data={duck} onDuckClick={() => onDuckClick(idx)} />
         ))}
-        {/* <Dog state="dog_find" position={{ x: 40, y: 0 }} /> */}
-        {/* <Dog state="dog_laugh" position={{ x: 200, y: 0 }} /> */}
+        <Dog
+          data={{
+            state: "dog_find_1",
+            position: { x: 200, y: -20 },
+            onAction: false,
+          }}
+        />
+        <Dog
+          data={{
+            state: "dog_find_2",
+            position: { x: 260, y: 0 },
+            onAction: false,
+          }}
+        />
+        <Dog
+          data={{
+            state: "dog_laugh",
+            position: { x: 320, y: 0 },
+            onAction: false,
+          }}
+        />
+        <Dog
+          data={{
+            state: "dog_hide",
+            position: { x: 380, y: 0 },
+            onAction: false,
+          }}
+        />
       </div>
       <Ground classname={styles.ground} />
     </div>

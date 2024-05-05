@@ -1,11 +1,11 @@
 import cn from "classnames";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { IDuckDataType } from "../../../types/common";
+import { IDuckData } from "../../../types/common";
 
 type IProps = {
   classname?: string;
-  data: IDuckDataType;
+  data: IDuckData;
   onDuckClick?: () => void;
 };
 
