@@ -8,6 +8,7 @@ import Dog from "../common/Dog";
 import GameHeader from "../common/GameHeader";
 import { IDogData, IDuckData, IZoneSize } from "../../types/common";
 import {
+  changeDogData,
   changeDucksData,
   createDog,
   createDuck,
@@ -90,7 +91,11 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
 
   useInterval((): void => {
     if (dog && dogActionDuck) {
-      console.log(dog, dogActionDuck);
+      const newDog = changeDogData(dog, dogActionDuck, zoneSize);
+      if (newDog.state === "dog_hide") {
+        setDogActionDuck(null);
+      }
+      setDog(newDog);
     }
   }, 3);
 

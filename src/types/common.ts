@@ -29,5 +29,6 @@ export type IDogState = "dog_find_1" | "dog_find_2" | "dog_laugh" | "dog_hide";
 export interface IDogData {
   state: IDogState;
   position: { x: number; y: number };
-  onAction: boolean;
+  dirChanged: boolean;
+  dirChangedDelay: number;
 }

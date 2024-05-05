@@ -1,14 +1,3 @@
-const DUCK_STATES = [
-  "left",
-  "right",
-  "top_left",
-  "top_right",
-  "bottom_left",
-  "bottom_right",
-  "shot",
-  "death",
-  "missed",
-];
 const DUCK_SIZE = 40;
 const DUCK_MAX_DIR_CHANGE_COUNT = 2;
 const DUCK_DIR_CHANGE_RANGE = { max: 500, min: 200 };
@@ -17,8 +6,10 @@ const MAX_FLAYING_DUCKS_COUNT = 4;
 const DUCKS_STATE_INTERVAL = 6;
 const NEW_DUCK_CREATE_INTERVAL = 2000;
 
+const DOG_WIDTH = 60;
+const DOG_HEIGHT = 72;
+
 export {
-  DUCK_STATES,
   DUCK_SIZE,
   DUCK_MAX_DIR_CHANGE_COUNT,
   DUCK_DIR_CHANGE_RANGE,
@@ -26,4 +17,6 @@ export {
   MAX_FLAYING_DUCKS_COUNT,
   NEW_DUCK_CREATE_INTERVAL,
   DUCKS_STATE_INTERVAL,
+  DOG_WIDTH,
+  DOG_HEIGHT,
 };
