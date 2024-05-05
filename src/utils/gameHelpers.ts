@@ -1,5 +1,6 @@
 import { IDogData, IDogState, IDuckData, IZoneSize } from "../types/common";
 import {
+  DOG_DIR_CHANGE_DELAY,
   DOG_HEIGHT,
   DOG_WIDTH,
   DUCK_DIR_CHANGE_RANGE,
@@ -230,7 +231,7 @@ const changeDogData = (
         newDog.position.y = dog.position.y + 1;
       }
     } else {
-      if (dog.dirChangedDelay > 500) {
+      if (dog.dirChangedDelay > DOG_DIR_CHANGE_DELAY) {
         newDog.dirChanged = true;
         newDog.position.y = dog.position.y - 1;
       } else {

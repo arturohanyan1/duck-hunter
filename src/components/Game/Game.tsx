@@ -14,6 +14,7 @@ import {
   createDuck,
 } from "../../utils/gameHelpers";
 import {
+  DOG_STATE_INTERVAL,
   DUCKS_STATE_INTERVAL,
   MAX_FLAYING_DUCKS_COUNT,
   NEW_DUCK_CREATE_INTERVAL,
@@ -68,6 +69,15 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
 
   // Game Intervals
   useInterval((): void => {
+    if (ducks.length < MAX_FLAYING_DUCKS_COUNT && zoneSize.width) {
+      const newDuck = createDuck(zoneSize.width);
+      const newDucks = [...ducks];
+      newDucks.push(newDuck);
+      setDucks(newDucks);
+    }
+  }, NEW_DUCK_CREATE_INTERVAL);
+
+  useInterval((): void => {
     if (ducks.length) {
       const curState = changeDucksData(ducks, zoneSize);
       if (curState.flyAwayDucks.length && !dogActionDuck) {
@@ -81,15 +91,6 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
   }, DUCKS_STATE_INTERVAL);
 
   useInterval((): void => {
-    if (ducks.length < MAX_FLAYING_DUCKS_COUNT && zoneSize.width) {
-      const newDuck = createDuck(zoneSize.width);
-      const newDucks = [...ducks];
-      newDucks.push(newDuck);
-      setDucks(newDucks);
-    }
-  }, NEW_DUCK_CREATE_INTERVAL);
-
-  useInterval((): void => {
     if (dog && dogActionDuck) {
       const newDog = changeDogData(dog, dogActionDuck, zoneSize);
       if (newDog.state === "dog_hide") {
@@ -97,7 +98,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
       }
       setDog(newDog);
     }
-  }, 3);
+  }, DOG_STATE_INTERVAL);
 
   return (
     <div className={cn(styles.container, classname)}>
