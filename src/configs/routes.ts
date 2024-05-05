@@ -4,5 +4,4 @@
 export enum EnumRoutes {
   // Root page
   MAIN = "/",
-  DUCK_HUNT = "duck-hunt",
 }
