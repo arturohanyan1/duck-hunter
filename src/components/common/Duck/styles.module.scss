@@ -7,7 +7,7 @@
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
-  animation-duration: 0.4s;
+  animation-duration: 0.2s;
   animation-iteration-count: infinite;
 
   &_state {
@@ -33,6 +33,7 @@
       animation-name: duck_shot;
     }
     &__death {
+      animation-duration: 0.4s;
       animation-name: duck_death;
     }
   }

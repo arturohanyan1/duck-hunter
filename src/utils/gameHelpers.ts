@@ -22,6 +22,10 @@ const isInvalidPos = (x: number, y: number, zone: IZoneSize): boolean => {
   return x < 0 || x > zone.width - 40 || y < -40 || y > zone.height - 40;
 };
 
+const isMissedPos = (x: number, y: number, zone: IZoneSize): boolean => {
+  return x < -40 || x > zone.width + 40 || y < -40 || y > zone.height;
+};
+
 const getNewState = (
   data: IDuckDataType,
   zoneSize: IZoneSize,
@@ -49,7 +53,7 @@ const getNewState = (
   newData.dirDuration = data.dirDuration + 1;
   if (data.dirChangedCount > 2) {
     newData.position = { x: newXPos, y: newYPos };
-    if (isInvalidPos(newXPos, newYPos, zoneSize)) {
+    if (isMissedPos(newXPos, newYPos, zoneSize)) {
       newData.state = "missed";
     }
     return newData;
