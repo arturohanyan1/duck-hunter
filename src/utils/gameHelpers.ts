@@ -33,7 +33,7 @@ const isInvalidPos = (x: number, y: number, zone: IZoneSize): boolean => {
   return x < 0 || x > zone.width - 40 || y < -40 || y > zone.height - 40;
 };
 
-const isMissedPos = (x: number, y: number, zone: IZoneSize): boolean => {
+const isFlyAwayPos = (x: number, y: number, zone: IZoneSize): boolean => {
   return x < -40 || x > zone.width + 40 || y < -40 || y > zone.height;
 };
 
@@ -64,8 +64,8 @@ const getNewState = (
   newData.dirDuration = data.dirDuration + 1;
   if (data.dirChangedCount > 2) {
     newData.position = { x: newXPos, y: newYPos };
-    if (isMissedPos(newXPos, newYPos, zoneSize)) {
-      newData.state = "missed";
+    if (isFlyAwayPos(newXPos, newYPos, zoneSize)) {
+      newData.state = "fly_away";
     }
     return newData;
   } else if (
@@ -100,7 +100,7 @@ export const changeDuckData = (
     }
   } else if (data.state === "death") {
     if (data.position.y < -40) {
-      newData.state = "missed";
+      newData.state = "hunted";
       return newData;
     } else {
       newData.position = { x: data.position.x, y: data.position.y - 1 };

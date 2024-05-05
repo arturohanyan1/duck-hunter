@@ -12,7 +12,8 @@ export type IDuckState =
   | "bottom_right"
   | "shot"
   | "death"
-  | "missed";
+  | "fly_away"
+  | "hunted";
 
 export interface IDuckData {
   state: IDuckState;

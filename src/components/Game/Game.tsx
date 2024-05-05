@@ -62,7 +62,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
         changeDuckData(el, zoneSize)
       );
       const filteredDucks = newDucks.filter(
-        (el: IDuckData) => el.state !== "missed"
+        (el: IDuckData) => !["fly_away", "hunted"].includes(el.state)
       );
       setDucks(filteredDucks);
     }
