@@ -7,7 +7,11 @@ import Ground from "../common/Ground";
 import Dog from "../common/Dog";
 import GameHeader from "../common/GameHeader";
 import { IDogData, IDuckData, IZoneSize } from "../../types/common";
-import { changeDuckData, createDog, createDuck } from "../../utils/gameHelpers";
+import {
+  changeDucksData,
+  createDog,
+  createDuck,
+} from "../../utils/gameHelpers";
 
 type IProps = {
   classname?: string;
@@ -17,6 +21,7 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
   // States
   const [ducks, setDucks] = useState<IDuckData[]>([]);
   const [dog, setDog] = useState<IDogData | null>(null);
+  const [dogActionDuck, setDogActionDuck] = useState<IDuckData | null>(null);
   const [zoneSize, setZoneSize] = useState<IZoneSize>({ width: 0, height: 0 });
   const [score, setScore] = useState<number>(0);
 
@@ -55,16 +60,17 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
     }
   }, [zoneSize, dog]);
 
-  // Game Logic
+  // Game Intervals
   useInterval((): void => {
     if (ducks.length) {
-      const newDucks = ducks.map((el: IDuckData) =>
-        changeDuckData(el, zoneSize)
-      );
-      const filteredDucks = newDucks.filter(
-        (el: IDuckData) => !["fly_away", "hunted"].includes(el.state)
-      );
-      setDucks(filteredDucks);
+      const curState = changeDucksData(ducks, zoneSize);
+      if (curState.flyAwayDucks.length && !dogActionDuck) {
+        setDogActionDuck(curState.flyAwayDucks[0]);
+      }
+      if (curState.huntedDucks.length && !dogActionDuck) {
+        setDogActionDuck(curState.huntedDucks[0]);
+      }
+      setDucks(curState.visibleDucks);
     }
   }, 6);
 
@@ -76,6 +82,12 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
       setDucks(newDucks);
     }
   }, 2000);
+
+  useInterval((): void => {
+    if (dog && dogActionDuck) {
+      console.log(dog, dogActionDuck);
+    }
+  }, 3);
 
   return (
     <div className={cn(styles.container, classname)}>

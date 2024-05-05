@@ -134,3 +134,32 @@ export const changeDuckData = (
     return newData;
   }
 };
+
+export const changeDucksData = (
+  ducks: IDuckData[],
+  zoneSize: IZoneSize
+): {
+  visibleDucks: IDuckData[];
+  flyAwayDucks: IDuckData[];
+  huntedDucks: IDuckData[];
+} => {
+  const newDucks = ducks.map((el: IDuckData) => changeDuckData(el, zoneSize));
+  const filteredDucks = newDucks.reduce(
+    (acc: any, cur: IDuckData) => {
+      if (cur.state === "fly_away") {
+        acc.flyAwayDucks.push(cur);
+      } else if (cur.state === "hunted") {
+        acc.huntedDucks.push(cur);
+      } else {
+        acc.visibleDucks.push(cur);
+      }
+      return acc;
+    },
+    {
+      visibleDucks: [],
+      flyAwayDucks: [],
+      huntedDucks: [],
+    }
+  );
+  return filteredDucks;
+};
