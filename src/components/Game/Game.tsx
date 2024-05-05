@@ -12,6 +12,11 @@ import {
   createDog,
   createDuck,
 } from "../../utils/gameHelpers";
+import {
+  DUCKS_STATE_INTERVAL,
+  MAX_FLAYING_DUCKS_COUNT,
+  NEW_DUCK_CREATE_INTERVAL,
+} from "../../utils/constants";
 
 type IProps = {
   classname?: string;
@@ -72,16 +77,16 @@ const DuckHunt: FC<IProps> = ({ classname }) => {
       }
       setDucks(curState.visibleDucks);
     }
-  }, 6);
+  }, DUCKS_STATE_INTERVAL);
 
   useInterval((): void => {
-    if (ducks.length < 4 && zoneSize.width) {
+    if (ducks.length < MAX_FLAYING_DUCKS_COUNT && zoneSize.width) {
       const newDuck = createDuck(zoneSize.width);
       const newDucks = [...ducks];
       newDucks.push(newDuck);
       setDucks(newDucks);
     }
-  }, 2000);
+  }, NEW_DUCK_CREATE_INTERVAL);
 
   useInterval((): void => {
     if (dog && dogActionDuck) {

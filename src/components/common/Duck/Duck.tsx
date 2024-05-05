@@ -2,6 +2,7 @@ import cn from "classnames";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { IDuckData } from "../../../types/common";
+import { DUCK_SIZE } from "../../../utils/constants";
 
 type IProps = {
   classname?: string;
@@ -13,7 +14,12 @@ const Duck: FC<IProps> = ({ classname, data, onDuckClick }) => {
   return (
     <div
       onClick={onDuckClick}
-      style={{ left: `${data.position?.x}px`, bottom: `${data.position?.y}px` }}
+      style={{
+        height: `${DUCK_SIZE}px`,
+        width: `${DUCK_SIZE}px`,
+        left: `${data.position?.x}px`,
+        bottom: `${data.position?.y}px`,
+      }}
       className={cn(
         styles.duck,
         {

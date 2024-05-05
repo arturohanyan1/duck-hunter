@@ -1,4 +1,10 @@
 import { IDogData, IDuckData, IZoneSize } from "../types/common";
+import {
+  DUCK_DIR_CHANGE_RANGE,
+  DUCK_MAX_DIR_CHANGE_COUNT,
+  DUCK_MAX_SHOT_STATE_DELAY,
+  DUCK_SIZE,
+} from "./constants";
 import { getRandomItemFromArray } from "./helpers";
 
 // DOG
@@ -14,13 +20,17 @@ export const createDog = (width: number): IDogData => {
 // DUCk
 export const createDuck = (width: number): IDuckData => {
   const state = getRandomItemFromArray(["top_left", "top_right"]);
-  const min = 40;
-  const max = width - 40;
+  const min = DUCK_SIZE;
+  const max = width - DUCK_SIZE;
   const xPos = Math.floor(Math.random() * (max - min + 1)) + min;
-  const dirChangedDelay = Math.floor(Math.random() * (500 - 200 + 1)) + 100;
+  const dirChangedDelay =
+    Math.floor(
+      Math.random() *
+        (DUCK_DIR_CHANGE_RANGE.max - DUCK_DIR_CHANGE_RANGE.min + 1)
+    ) + 100;
   const newDuck = {
     state: state,
-    position: { x: xPos, y: -40 },
+    position: { x: xPos, y: -DUCK_SIZE },
     dirChangedCount: 0,
     dirChangedDelay: dirChangedDelay,
     dirDuration: 0,
@@ -30,11 +40,21 @@ export const createDuck = (width: number): IDuckData => {
 };
 
 const isInvalidPos = (x: number, y: number, zone: IZoneSize): boolean => {
-  return x < 0 || x > zone.width - 40 || y < -40 || y > zone.height - 40;
+  return (
+    x < 0 ||
+    x > zone.width - DUCK_SIZE ||
+    y < -DUCK_SIZE ||
+    y > zone.height - DUCK_SIZE
+  );
 };
 
 const isFlyAwayPos = (x: number, y: number, zone: IZoneSize): boolean => {
-  return x < -40 || x > zone.width + 40 || y < -40 || y > zone.height;
+  return (
+    x < -DUCK_SIZE ||
+    x > zone.width + DUCK_SIZE ||
+    y < -DUCK_SIZE ||
+    y > zone.height
+  );
 };
 
 const getNewState = (
@@ -45,7 +65,7 @@ const getNewState = (
 ): IDuckData => {
   const newData = { ...data };
   const newStates =
-    data.dirChangedCount === 2
+    data.dirChangedCount === DUCK_MAX_DIR_CHANGE_COUNT
       ? newYPos < 0
         ? ["top_left", "top_right"]
         : ["left", "right", "top_left", "top_right"]
@@ -62,7 +82,7 @@ const getNewState = (
   const availableStates = newStates;
 
   newData.dirDuration = data.dirDuration + 1;
-  if (data.dirChangedCount > 2) {
+  if (data.dirChangedCount > DUCK_MAX_DIR_CHANGE_COUNT) {
     newData.position = { x: newXPos, y: newYPos };
     if (isFlyAwayPos(newXPos, newYPos, zoneSize)) {
       newData.state = "fly_away";
@@ -91,7 +111,7 @@ export const changeDuckData = (
 ): IDuckData => {
   let newData = { ...data };
   if (data.state === "shot") {
-    if (data.shotStateDelay > 25) {
+    if (data.shotStateDelay > DUCK_MAX_SHOT_STATE_DELAY) {
       newData.state = "death";
       return newData;
     } else {
@@ -99,7 +119,7 @@ export const changeDuckData = (
       return newData;
     }
   } else if (data.state === "death") {
-    if (data.position.y < -40) {
+    if (data.position.y < -DUCK_SIZE) {
       newData.state = "hunted";
       return newData;
     } else {
